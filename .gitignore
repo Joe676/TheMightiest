@@ -1,1 +1,4 @@
 .env
+
+#files generated from code
+characters.csv
