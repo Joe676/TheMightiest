@@ -6,5 +6,7 @@ __pycache__
 #files generated from code
 characters.csv
 
-#firebase
-/lib/firebase_options.dart
+#google key
+firebase_options.dart
+google-services.json
+firebase_app_id_file.json
