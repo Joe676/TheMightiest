@@ -1,4 +1,7 @@
 .env
+.vscode
+firebase_admin_key.json
+__pycache__
 
 #files generated from code
 characters.csv

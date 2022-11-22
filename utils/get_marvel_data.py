@@ -1,44 +1,45 @@
-from array import array
-import string
+import sys
 import requests
-import json
 from time import time
 from dotenv import load_dotenv
 from os import environ
 from hashlib import md5
-from dataclasses import dataclass
+from Character import Character
+from upload_to_firestore import upload_characters
 
-@dataclass
-class Character:
-    name: string
-    picture_url: string
+SHOULD_UPLOAD = False
 
-def get_timestamp() -> string:
+def get_timestamp() -> str:
     return str(int(time()))
 
 def parse_results(results_list: list) -> list[Character]:
+    not_allowed_images = ["image_not_available", "4c002e0305708"]
     output = []
     for character in results_list:
+        character_id = character["id"]
         name = character["name"]
         thumbnail = character["thumbnail"]
-        img_path: string = thumbnail["path"]
+        img_path: str = thumbnail["path"]
         img_extension = thumbnail["extension"]
         
         img_name = img_path.split("/")[-1]
-        if img_name == "image_not_available":
+        if img_name in not_allowed_images:
             continue
-        output.append(Character(name, f"{img_path}.{img_extension}"))
+        output.append(Character(character_id, name, f"{img_path}.{img_extension}", 0, 0))
     return output
 
-def save_characters(characters: list[Character]) -> bool:
+def save_characters(characters: list[Character]) -> None:
     lines = []
     for character in characters:
         lines.append(f"{character.name}, {character.picture_url}\n")
 
-    with open("characters.csv", "w", encoding="utf-8") as file:
+    with open("utils/characters.csv", "w", encoding="utf-8") as file:
         file.writelines(lines)
 
 if __name__ == "__main__":
+    if "--upload" in sys.argv:
+        SHOULD_UPLOAD = True
+
     load_dotenv()
 
     MARVEL_URL = "https://gateway.marvel.com:443/v1/public/characters"
@@ -74,3 +75,5 @@ if __name__ == "__main__":
         
         offset += limit
     save_characters(all_characters)
+    if SHOULD_UPLOAD:
+        upload_characters(all_characters)
