@@ -11,13 +11,6 @@ class CharacterVote extends StatefulWidget {
 }
 
 class _CharacterVoteState extends State<CharacterVote> {
-  // Character character = Character(
-  //     "character-0",
-  //     0,
-  //     "Abomination (Emil Blonsky)",
-  //     "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg",
-  //     10,
-  //     100);
 
   @override
   Widget build(BuildContext context) {

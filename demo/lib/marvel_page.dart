@@ -1,4 +1,4 @@
-import 'package:demo/character_vote.dart';
+import 'package:demo/components/character_vote.dart';
 import 'package:demo/dataAccess/CharactersDataAccess.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

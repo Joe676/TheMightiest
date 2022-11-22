@@ -7,15 +7,11 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Tu pojawią się wyniki",
-          style: TextStyle(
-            fontSize: 50,
-            color: Colors.white,
-          ),
-        ),
+    return Scaffold(
+      body: ListView(
+        children: const [
+          Text("haha")
+        ],
       ),
     );
   }
