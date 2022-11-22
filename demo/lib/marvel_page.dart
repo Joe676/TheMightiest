@@ -1,6 +1,10 @@
+import 'package:demo/character_vote.dart';
+import 'package:demo/dataAccess/CharactersDataAccess.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+
+import 'models/Character.dart';
 
 class MarvelPage extends StatefulWidget {
   const MarvelPage({super.key});
@@ -10,6 +14,18 @@ class MarvelPage extends StatefulWidget {
 }
 
 class _MarvelPageState extends State<MarvelPage> {
+  List<Character> characters = getDummyCharacters();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      var newChars = await getShowdownCharacters();
+      setState(() {
+        characters = newChars;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,22 +44,7 @@ class _MarvelPageState extends State<MarvelPage> {
           const SizedBox(
             height: 10,
           ),
-          Center(
-            child: Image.network(
-              "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg",
-              width: 200,
-              height: 300,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Abomination (Emil Blonsky)"),
-            ),
-          ),
+          CharacterVote(character: characters.first),
           const SizedBox(
             height: 40,
           ),
@@ -59,22 +60,7 @@ class _MarvelPageState extends State<MarvelPage> {
           const SizedBox(
             height: 40,
           ),
-          Center(
-            child: Image.network(
-              "http://i.annihil.us/u/prod/marvel/i/mg/5/50/4c003442a3ea6.jpg",
-              width: 200,
-              height: 300,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Johnny Blaze"),
-            ),
-          ),
+          CharacterVote(character: characters[1]),
         ],
       ),
     );

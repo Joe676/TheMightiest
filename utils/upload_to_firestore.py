@@ -11,8 +11,8 @@ def upload_characters(characters: list[Character]) -> None:
     # batch = db.batch() //batch can take up to 500 adds, but it still uses up one write per document
     characters_collection_ref = db.collection(u'characters')
     print('Uploading to *firebase*...')
-    for character in characters:
-        char_ref = characters_collection_ref.document('character-'+str(character.character_id))
+    for i, character in enumerate(characters):
+        char_ref = characters_collection_ref.document('character-'+str(i))
         char_ref.set(character.__dict__, merge=True)
     print('Uploading finished.')
     # batch.commit()

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Color.fromARGB(255, 209, 202, 202),
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const Rootpage(),
     );
@@ -55,34 +55,12 @@ class _RootpageState extends State<Rootpage> {
         title: const Text("demo"),
       ),
       body: pages[currentPage],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          debugPrint("nacisnieto guziczek");
-          final ref = FirebaseDatabase.instance.ref();
-          final snapshot = await ref.child('users/123').get();
-          if (snapshot.exists) {
-            debugPrint(snapshot.value.toString());
-            debugPrint(snapshot.value.toString().substring(6, 8));
-            ctr = int.parse(snapshot.value.toString().substring(6, 8));
-          } else {
-            debugPrint('No data available.');
-          }
-
-          DatabaseReference refSend =
-              FirebaseDatabase.instance.ref("users/123");
-          await refSend.set({
-            "name": "John",
-            "age": ctr + 1,
-          });
-        },
-        child: const Icon(Icons.heart_broken),
-      ),
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.check_box), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.sports_martial_arts), label: "Showdown"),
           NavigationDestination(icon: Icon(Icons.table_rows), label: "Results"),
-          NavigationDestination(
-              icon: Icon(Icons.person_sharp), label: "Profile"),
+          // NavigationDestination(
+          //     icon: Icon(Icons.person_sharp), label: "Profile"),
         ],
         onDestinationSelected: (int index) {
           setState(() {
