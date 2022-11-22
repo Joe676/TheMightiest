@@ -30,7 +30,7 @@ class _MarvelPageState extends State<MarvelPage> {
           ),
           Center(
             child: Image.network(
-              "https://i.pinimg.com/originals/23/17/11/231711c17776fbdac6e3cb1b202cada7.jpg",
+              "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg",
               width: 200,
               height: 300,
             ),
@@ -41,7 +41,7 @@ class _MarvelPageState extends State<MarvelPage> {
           Center(
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text("Kapitan Americorg"),
+              child: const Text("Abomination (Emil Blonsky)"),
             ),
           ),
           const SizedBox(
@@ -61,7 +61,7 @@ class _MarvelPageState extends State<MarvelPage> {
           ),
           Center(
             child: Image.network(
-              "https://i.pinimg.com/originals/af/cf/c3/afcfc3f135baf95aaf1ac1daa594b895.jpg",
+              "http://i.annihil.us/u/prod/marvel/i/mg/5/50/4c003442a3ea6.jpg",
               width: 200,
               height: 300,
             ),
@@ -72,7 +72,7 @@ class _MarvelPageState extends State<MarvelPage> {
           Center(
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text("Thorgi"),
+              child: const Text("Johnny Blaze"),
             ),
           ),
         ],
