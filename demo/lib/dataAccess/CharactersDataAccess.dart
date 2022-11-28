@@ -1,3 +1,4 @@
+//import 'dart:ffi';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/models/Character.dart';
@@ -20,7 +21,8 @@ List<int> getRandomIds(int maxId) {
   if (n2 >= n1) n2 += 1;
   return [n1, n2];
 }
-List<Character> getDummyCharacters(){
+
+List<Character> getDummyCharacters() {
   return [
     Character(
         "character-0",
@@ -61,5 +63,44 @@ Future<List<Character>> getShowdownCharacters() async {
     );
   }
 
+  return output;
+}
+
+void increaseVoteFor(String DocumentID, int votesFor) {
+  final database = FirebaseFirestore.instance;
+  database
+      .collection("characters")
+      .doc(DocumentID)
+      .update({"votes_for": votesFor}).then(
+          (value) => print("Zinkrementowano wartosc votesFor dla $DocumentID"),
+          onError: (e) => print("Error updating document $e"));
+}
+
+void increaseVoteAgainst(String DocumentID, int votesAgainst) {
+  final database = FirebaseFirestore.instance;
+  database
+      .collection("characters")
+      .doc(DocumentID)
+      .update({"votes_against": votesAgainst}).then(
+          (value) =>
+              print("Zinkrementowano wartosc votesAgainst dla $DocumentID"),
+          onError: (e) => print("Error updating document $e"));
+}
+
+Future<List<Character>> getWholeDataSortedByVotesFor() async {
+  var output = <Character>[];
+  final database = FirebaseFirestore.instance;
+  final wholeData =
+      database.collection("characters").orderBy("votes_for", descending: true);
+  QuerySnapshot query = await wholeData.get();
+  final allData = query.docs.map((doc) => doc.data()).toList();
+  for (Object? obj in allData) {
+    final data = obj as Map<String, dynamic>;
+    var char = Character("", data["character_id"], data["name"],
+        data["picture_url"], data["votes_for"], data["votes_against"]);
+    output.add(char);
+    if (output.length == 20) break; //only for testing
+  }
+  print(allData.length);
   return output;
 }

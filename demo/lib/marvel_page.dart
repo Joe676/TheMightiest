@@ -28,6 +28,17 @@ class _MarvelPageState extends State<MarvelPage> {
 
   @override
   Widget build(BuildContext context) {
+    void onTapButton(int ID) {
+      if (ID == 0) {
+        characters.first.getVoteFor();
+        characters[1].getVoteAgainst();
+      } else if (ID == 1) {
+        characters.first.getVoteAgainst();
+        characters[1].getVoteFor();
+      }
+      refresh();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Marvel"),
@@ -44,7 +55,7 @@ class _MarvelPageState extends State<MarvelPage> {
           const SizedBox(
             height: 10,
           ),
-          CharacterVote(character: characters.first),
+          CharacterVote(character: characters.first, onTap: onTapButton, ID: 0),
           const SizedBox(
             height: 40,
           ),
@@ -60,9 +71,22 @@ class _MarvelPageState extends State<MarvelPage> {
           const SizedBox(
             height: 40,
           ),
-          CharacterVote(character: characters[1]),
+          CharacterVote(character: characters[1], onTap: onTapButton, ID: 1),
+          const SizedBox(
+            height: 100,
+          ),
+          Center(
+              child: ElevatedButton(
+                  onPressed: refresh, child: const Text("Odswież"))),
         ],
       ),
     );
+  }
+
+  void refresh() async {
+    var newChars = await getShowdownCharacters();
+    setState(() {
+      characters = newChars;
+    });
   }
 }
