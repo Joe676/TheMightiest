@@ -1,4 +1,3 @@
-import 'package:demo/components/voteDelegate.dart';
 import 'package:demo/marvel_page.dart';
 import 'package:demo/models/Character.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,10 +22,10 @@ class _CharacterVoteState extends State<CharacterVote> {
     return Column(
       children: [
         Center(
-          child: Image.network(
-            widget.character.imgUrl,
-            width: 200,
-            height: 300,
+          child: CircleAvatar(
+            backgroundImage:
+                Image.network(widget.character.imgUrl.toString()).image,
+            radius: 170,
           ),
         ),
         const SizedBox(

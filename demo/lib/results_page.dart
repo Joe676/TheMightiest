@@ -23,41 +23,24 @@ class _ResultsPageState extends State<ResultsPage> {
     return Scaffold(
       body: ListView.builder(
         itemCount: characters.length,
-        prototypeItem: ListTile(
-          title: Text("Abomination"),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
+        itemExtent: 100,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-              title: Text(characters[index].name.toString()),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 2),
-                  borderRadius: BorderRadius.circular(20)),
-              leading: CircleAvatar(
-                  backgroundImage:
-                      Image.network(characters[index].imgUrl).image,
-                  child: Stack(
-                    children: <Widget>[
-                      // Stroked text as border.
-                      Text(
-                        ((index + 1).toString()),
-                        style: TextStyle(
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 4
-                            ..color = Colors.black,
-                        ),
-                      ),
-                      // Solid text as fill.
-                      Text(
-                        (index + 1).toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  )));
+            title: Text(
+              "${index + 1}. ${characters[index].name}",
+              style: const TextStyle(fontSize: 50),
+            ),
+            subtitle: Text("Number of votes: ${characters[index].votesFor}"),
+            shape: RoundedRectangleBorder(
+              side: const BorderSide(width: 2.0),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            //minLeadingWidth: 100,
+            leading: CircleAvatar(
+              backgroundImage: Image.network(characters[index].imgUrl).image,
+              radius: 50,
+            ),
+          );
         },
       ),
     );

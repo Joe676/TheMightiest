@@ -40,16 +40,6 @@ class _MarvelPageState extends State<MarvelPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Marvel"),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.home_filled),
-        ),
-      ),
       body: Column(
         children: [
           const SizedBox(
