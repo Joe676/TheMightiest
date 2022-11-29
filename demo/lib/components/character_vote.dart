@@ -22,12 +22,24 @@ class _CharacterVoteState extends State<CharacterVote> {
     return Column(
       children: [
         Center(
-          child: CircleAvatar(
-            backgroundImage:
-                Image.network(widget.character.imgUrl.toString()).image,
-            radius: 170,
-          ),
-        ),
+            child: GestureDetector(
+          onTap: () {
+            print(widget.character.name.toString());
+            print(widget.character.documentId.toString());
+            widget.onTap(widget.ID);
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 218, 218, 218),
+                      width: 4.0)),
+              child: CircleAvatar(
+                backgroundImage:
+                    Image.network(widget.character.imgUrl.toString()).image,
+                radius: 170,
+              )),
+        )),
         const SizedBox(
           height: 10,
         ),

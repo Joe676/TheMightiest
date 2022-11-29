@@ -42,6 +42,11 @@ class _MarvelPageState extends State<MarvelPage> {
     return Scaffold(
       body: Column(
         children: [
+          const Text(
+            "Who will win this Showdown?",
+            style: TextStyle(
+                fontSize: 60, color: Color.fromARGB(255, 233, 233, 233)),
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -55,6 +60,7 @@ class _MarvelPageState extends State<MarvelPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 233, 233, 233),
               ),
             ),
           ),
@@ -67,7 +73,14 @@ class _MarvelPageState extends State<MarvelPage> {
           ),
           Center(
               child: ElevatedButton(
-                  onPressed: refresh, child: const Text("Odswież"))),
+                  onPressed: refresh,
+                  child: const Text(
+                    "Draw new pair",
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Color.fromARGB(255, 236, 152, 152),
+                    ),
+                  ))),
         ],
       ),
     );

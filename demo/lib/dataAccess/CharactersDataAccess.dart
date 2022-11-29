@@ -87,11 +87,24 @@ void increaseVoteAgainst(String DocumentID, int votesAgainst) {
           onError: (e) => print("Error updating document $e"));
 }
 
-Future<List<Character>> getWholeDataSortedByVotesFor() async {
+Future<List<Character>> getWholeDataSortedByVotesFor(
+    int votes, String name) async {
   var output = <Character>[];
   final database = FirebaseFirestore.instance;
-  final wholeData =
-      database.collection("characters").orderBy("votes_for", descending: true);
+  var wholeData;
+  if (name.isEmpty) {
+    wholeData = database
+        .collection("characters")
+        .orderBy("votes_for", descending: true)
+        .orderBy("name")
+        .limit(10);
+  } else {
+    wholeData = database
+        .collection("characters")
+        .orderBy("votes_for", descending: true)
+        .orderBy("name")
+        .startAfter([votes, name]).limit(10);
+  }
   QuerySnapshot query = await wholeData.get();
   final allData = query.docs.map((doc) => doc.data()).toList();
   for (Object? obj in allData) {
@@ -99,8 +112,8 @@ Future<List<Character>> getWholeDataSortedByVotesFor() async {
     var char = Character("", data["character_id"], data["name"],
         data["picture_url"], data["votes_for"], data["votes_against"]);
     output.add(char);
-    if (output.length == 20) break; //only for testing
   }
   print(allData.length);
+
   return output;
 }

@@ -66,7 +66,8 @@ class _RootpageState extends State<Rootpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 80,
+        leadingWidth: 100,
+        shadowColor: const Color.fromARGB(78, 255, 0, 0),
         leading: Image.network(
             "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Marvel-Comics-Logo.svg/1280px-Marvel-Comics-Logo.svg.png"),
         title: const Text(
