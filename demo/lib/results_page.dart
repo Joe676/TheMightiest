@@ -1,6 +1,7 @@
 import 'package:demo/dataAccess/CharactersDataAccess.dart';
 import 'package:demo/main.dart';
 import 'package:demo/models/Character.dart';
+import 'package:demo/models/pop_up_hero.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,12 @@ class _ResultsPageState extends State<ResultsPage> {
         itemExtent: 100,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) =>
+                      pop_up_hero(context, characters[index]));
+            },
             title: Text(
               "${index + 1}. ${characters[index].name}",
               style: const TextStyle(
