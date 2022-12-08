@@ -40,12 +40,38 @@ class _MarvelPageState extends State<MarvelPage> {
     }
 
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: refresh,
+        child: const Text(
+          "Draw new pair",
+          style: TextStyle(
+            fontSize: 40,
+            color: Color.fromARGB(255, 236, 152, 152),
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          const Text(
-            "Who will win this Showdown?",
-            style: TextStyle(
-                fontSize: 60, color: Color.fromARGB(255, 233, 233, 233)),
+          const Center(
+            child: Text(
+              "Who will win this",
+              style: TextStyle(
+                  fontSize: 60, color: Color.fromARGB(255, 233, 233, 233)),
+            ),
+          ),
+          const Center(
+            child: Text(
+              "Showdown?",
+              style: TextStyle(
+                  fontSize: 60,
+                  color: Color.fromARGB(255, 233, 233, 233),
+                  shadows: [
+                    Shadow(
+                        color: Color.fromARGB(238, 0, 0, 0),
+                        blurRadius: 1,
+                        offset: Offset(5, 5))
+                  ]),
+            ),
           ),
           const SizedBox(
             height: 10,
@@ -71,16 +97,6 @@ class _MarvelPageState extends State<MarvelPage> {
           const SizedBox(
             height: 100,
           ),
-          Center(
-              child: ElevatedButton(
-                  onPressed: refresh,
-                  child: const Text(
-                    "Draw new pair",
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color.fromARGB(255, 236, 152, 152),
-                    ),
-                  ))),
         ],
       ),
     );

@@ -37,7 +37,7 @@ class _ResultsPageState extends State<ResultsPage> {
             title: Text(
               "${index + 1}. ${characters[index].name}",
               style: const TextStyle(
-                  fontSize: 50, color: Color.fromARGB(255, 255, 255, 255)),
+                  overflow: TextOverflow.ellipsis, fontSize: 50, color: Color.fromARGB(255, 255, 255, 255)),
             ),
             subtitle: Text(
               "Number of votes: ${characters[index].votesFor}",
@@ -48,9 +48,12 @@ class _ResultsPageState extends State<ResultsPage> {
               borderRadius: BorderRadius.circular(20),
             ),
             minLeadingWidth: 60,
-            leading: CircleAvatar(
-              backgroundImage: Image.network(characters[index].imgUrl).image,
-              radius: 40,
+            leading: Hero(
+              tag: "pic",
+              child: CircleAvatar(
+                backgroundImage: Image.network(characters[index].imgUrl).image,
+                radius: 40,
+              ),
             ),
           );
         },

@@ -15,9 +15,12 @@ Widget pop_up_hero(BuildContext context, Character hero) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Center(
-          child: Image.network(
-            hero.imgUrl,
-            height: 400,
+          child: Hero(
+            tag: "pic",
+            child: Image.network(
+              hero.imgUrl,
+              height: 400,
+            ),
           ),
         ),
         const SizedBox(
